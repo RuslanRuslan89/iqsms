@@ -1,8 +1,3 @@
-// Простой скрипт для формы регистрации
-document.querySelector('.reg-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  alert("Спасибо! На ваш номер отправлено подтверждение.");
-});
 // Анимация элементов при скролле
 function animateOnScroll() {
   const animatedElements = document.querySelectorAll('.animate');
@@ -19,7 +14,16 @@ function animateOnScroll() {
 window.addEventListener('scroll', animateOnScroll);
 window.addEventListener('load', animateOnScroll);
 
-// Обновление активного пункта меню
+// Плавный скролл
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// Подсветка активной ссылки
 function setActiveLink() {
   const sections = document.querySelectorAll("section");
   const navLinks = document.querySelectorAll("nav a");
