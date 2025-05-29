@@ -48,3 +48,24 @@ function setActiveLink() {
 
 window.addEventListener("scroll", setActiveLink);
 window.addEventListener("load", setActiveLink);
+// Анимация заголовков по буквам
+function animateTitle() {
+  const title = document.querySelector('.animated-title');
+  if (!title) return;
+
+  let html = '';
+  for (let i = 0; i < title.textContent.length; i++) {
+    html += `<span>${title.textContent[i]}</span>`;
+  }
+  title.innerHTML = html;
+
+  // Анимация букв
+  const spans = title.querySelectorAll('span');
+  spans.forEach((span, index) => {
+    setTimeout(() => {
+      span.style.animation = 'letterFadeIn 0.5s ease forwards';
+    }, index * 100); // Задержка между буквами
+  });
+}
+
+window.addEventListener('load', animateTitle);
