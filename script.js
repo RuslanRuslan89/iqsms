@@ -69,3 +69,25 @@ function animateTitle() {
 }
 
 window.addEventListener('load', animateTitle);
+// Показ popup при первой загрузке
+function showFirstTimePopup() {
+  const popup = document.getElementById("first-time-popup");
+  if (!localStorage.getItem("popupShown")) {
+    popup.style.display = "flex";
+    localStorage.setItem("popupShown", true);
+  }
+
+  // Закрытие popup
+  document.querySelector(".close-btn").addEventListener("click", () => {
+    popup.style.display = "none";
+  });
+
+  // Отправка формы (можно заменить на Google Forms/Formspree)
+  document.querySelector(".popup-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    alert("Спасибо! На ваш номер отправлено подтверждение.");
+    popup.style.display = "none";
+  });
+}
+
+window.addEventListener("load", showFirstTimePopup);
