@@ -1,4 +1,21 @@
-/* Общие стили */
+/* Фон */
+body {
+  background: linear-gradient(145deg, #F8F9FA, #E6F7EF);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Мягкая текстура / тень на фоне */
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><path d="M0 20h40v2H0z" fill="#e0e0e0" opacity="0.1"/></svg>');
+  z-index: -1;
+}/* Общие стили */
 * {
   margin: 0;
   padding: 0;
