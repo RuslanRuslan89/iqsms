@@ -1,93 +1,85 @@
-// Анимация элементов при скролле
-function animateOnScroll() {
-  const animatedElements = document.querySelectorAll('.animate');
-  const windowHeight = window.innerHeight;
+// script.js
 
-  animatedElements.forEach((element) => {
-    const elementTop = element.getBoundingClientRect().top;
-    if (elementTop - windowHeight < 0) {
-      element.classList.add('visible');
-    }
-  });
-}
-
-window.addEventListener('scroll', animateOnScroll);
-window.addEventListener('load', animateOnScroll);
-
-// Плавный скролл
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    target.scrollIntoView({ behavior: 'smooth' });
-  });
+// Анимация загрузки
+window.addEventListener('load', function () {
+    document.getElementById('loading').style.display = 'none';
 });
 
-// Подсветка активной ссылки
-function setActiveLink() {
-  const sections = document.querySelectorAll("section");
-  const navLinks = document.querySelectorAll("nav a");
+// Анимация при скролле
+document.addEventListener("DOMContentLoaded", function () {
+    const sections = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
 
-  let currentSection = "";
+    sections.forEach(section => observer.observe(section));
+});
 
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop - 50;
-    const sectionHeight = section.clientHeight;
-    if (pageYOffset >= sectionTop - 100) {
-      currentSection = section.getAttribute("id");
+// Эффект затухания шапки
+window.addEventListener('scroll', function () {
+    if (window.scrollY > 50) {
+        document.body.classList.add('scrolled');
+    } else {
+        document.body.classList.remove('scrolled');
     }
-  });
+});
 
-  navLinks.forEach(link => {
-    link.classList.remove("active");
-    if (link.getAttribute("href").includes(currentSection)) {
-      link.classList.add("active");
+// Подсветка активного пункта меню
+document.addEventListener('DOMContentLoaded', function () {
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll(".nav a");
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.offsetHeight;
+
+            if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                current = section.getAttribute("id");
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove("active");
+            if (link.getAttribute("href") === "#" + current) {
+                link.classList.add("active");
+            }
+        });
+    });
+});
+
+// Форма обратной связи
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById("contactForm");
+    if (form) {
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            alert("Спасибо за обращение! Мы скоро свяжемся с вами.");
+            this.reset();
+        });
     }
-  });
+});
+
+// Кнопка "Наверх"
+const backToTopButton = document.getElementById('backToTop');
+
+if (backToTopButton) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopButton.style.display = 'block';
+        } else {
+            backToTopButton.style.display = 'none';
+        }
+    });
+
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 }
-
-window.addEventListener("scroll", setActiveLink);
-window.addEventListener("load", setActiveLink);
-// Анимация заголовков по буквам
-function animateTitle() {
-  const title = document.querySelector('.animated-title');
-  if (!title) return;
-
-  let html = '';
-  for (let i = 0; i < title.textContent.length; i++) {
-    html += `<span>${title.textContent[i]}</span>`;
-  }
-  title.innerHTML = html;
-
-  // Анимация букв
-  const spans = title.querySelectorAll('span');
-  spans.forEach((span, index) => {
-    setTimeout(() => {
-      span.style.animation = 'letterFadeIn 0.5s ease forwards';
-    }, index * 100); // Задержка между буквами
-  });
-}
-
-window.addEventListener('load', animateTitle);
-// Показ popup при первой загрузке
-function showFirstTimePopup() {
-  const popup = document.getElementById("first-time-popup");
-  if (!localStorage.getItem("popupShown")) {
-    popup.style.display = "flex";
-    localStorage.setItem("popupShown", true);
-  }
-
-  // Закрытие popup
-  document.querySelector(".close-btn").addEventListener("click", () => {
-    popup.style.display = "none";
-  });
-
-  // Отправка формы (можно заменить на Google Forms/Formspree)
-  document.querySelector(".popup-form").addEventListener("submit", function(e) {
-    e.preventDefault();
-    alert("Спасибо! На ваш номер отправлено подтверждение.");
-    popup.style.display = "none";
-  });
-}
-
-window.addEventListener("load", showFirstTimePopup);
