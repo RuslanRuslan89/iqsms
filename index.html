@@ -1,57 +1,126 @@
-<header class="glass-header">
-  <div class="container">
-    <div class="logo">
-      <span class="logo-icon">✉️</span>
-      <h1>SMS<span class="gradient-text">Wave</span></h1>
-    </div>
-    <nav>
-      <a href="#">Главная</a>
-      <a href="#">Тарифы</a>
-      <a href="#">API</a>
-      <a href="#">Контакты</a>
-    </nav>
-    <button class="btn-login">Войти</button>
-  </div>
-</header>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMS Wave — сервис рассылок</title>
+  <style>
+    /* Основные стили */
+    :root {
+      --primary: #6c5ce7;
+      --secondary: #a29bfe;
+      --dark: #2d3436;
+      --light: #f5f6fa;
+    }
 
-<section class="hero">
-  <div class="hero-content">
-    <h2>Отправляйте SMS <span class="gradient-text">быстро</span> и <span class="gradient-text">надёжно</span></h2>
-    <p>Доставка 99,9% | Скорость 2 сек | Простое API</p>
-    <div class="quick-start-form">
-      <input type="text" placeholder="Ваш номер телефона">
-      <button class="btn-primary">Начать бесплатно</button>
-    </div>
-  </div>
-  <div class="hero-wave-bg"></div>
-</section>
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      margin: 0;
+      padding: 0;
+    }
 
-<section class="features">
-  <div class="feature-card glass-card">
-    <div class="feature-icon">⚡</div>
-    <h3>Мгновенная доставка</h3>
-    <p>Среднее время доставки — 2 секунды</p>
-  </div>
-  <div class="feature-card glass-card">
-    <div class="feature-icon">📊</div>
-    <h3>Подробная аналитика</h3>
-    <p>Отчёты в реальном времени</p>
-  </div>
-  <div class="feature-card glass-card">
-    <div class="feature-icon">🔒</div>
-    <h3>100% безопасность</h3>
-    <p>Шифрование данных</p>
-  </div>
-</section>
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-<section class="dashboard-preview">
-  <div class="demo-stats">
-    <div class="stat">
-      <span class="counter" data-target="1000000">0</span>
-      <p>SMS отправлено</p>
+    /* Хедер */
+    header {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      padding: 20px 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Герой-блок */
+    .hero {
+      padding: 80px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero h2 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    /* Карточки */
+    .features {
+      display: flex;
+      gap: 20px;
+      padding: 40px 0;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <span>✉️</span>
+        <h1>SMS<span class="gradient-text">Wave</span></h1>
+      </div>
     </div>
-  </div>
-  <div class="demo-screen glass-card">
-    <!-- Здесь можно добавить SVG или скриншот интерфейса -->
-  </div>
-</section>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h2>Отправляйте SMS <span class="gradient-text">быстро</span></h2>
+      <button class="btn-primary">Попробовать бесплатно</button>
+    </div>
+  </section>
+
+  <section class="features container">
+    <div class="feature-card">
+      <h3>⚡ Мгновенная доставка</h3>
+      <p>Среднее время — 2 секунды</p>
+    </div>
+    <div class="feature-card">
+      <h3>📊 Аналитика</h3>
+      <p>Подробные отчеты</p>
+    </div>
+  </section>
+
+  <script>
+    // Простой JS для проверки
+    console.log("Скрипт работает!");
+  </script>
+</body>
+</html>
