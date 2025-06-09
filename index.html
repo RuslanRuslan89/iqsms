@@ -124,3 +124,181 @@
   </script>
 </body>
 </html>
+
+<section class="sms-builder">
+  <h2>Создайте SMS за 30 секунд</h2>
+  <div class="builder-container">
+    <div class="message-editor">
+      <textarea id="sms-text" maxlength="160" placeholder="Введите текст сообщения..."></textarea>
+      <div class="editor-tools">
+        <button data-var="{NAME}">Имя</button>
+        <button data-var="{DATE}">Дата</button>
+        <button data-var="{TIME}">Время</button>
+        <span id="char-counter">160</span>
+      </div>
+    </div>
+    <div class="phone-preview">
+      <div class="phone-mockup">
+        <div class="phone-screen">
+          <div class="sms-notification">
+            <div class="sender">SMS Wave</div>
+            <div id="preview-text">Текст вашего сообщения появится здесь</div>
+            <div class="timestamp">Только что</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="btn-gradient">Отправить тестовое SMS</button>
+</section>
+
+<script>
+  const smsText = document.getElementById('sms-text');
+  const previewText = document.getElementById('preview-text');
+  const charCounter = document.getElementById('char-counter');
+  
+  smsText.addEventListener('input', () => {
+    previewText.textContent = smsText.value || 'Текст вашего сообщения появится здесь';
+    charCounter.textContent = 160 - smsText.value.length;
+  });
+  
+  document.querySelectorAll('.editor-tools button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      smsText.value += btn.dataset.var;
+      smsText.dispatchEvent(new Event('input'));
+    });
+  });
+</script>
+
+<style>
+  .sms-builder {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin: 60px auto;
+    max-width: 1200px;
+    box-shadow: 0 10px 50px rgba(108, 92, 231, 0.1);
+  }
+  
+  .builder-container {
+    display: flex;
+    gap: 40px;
+    margin: 30px 0;
+  }
+  
+  .message-editor {
+    flex: 1;
+  }
+  
+  #sms-text {
+    width: 100%;
+    height: 150px;
+    border: 2px solid #f0f0f8;
+    border-radius: 12px;
+    padding: 20px;
+    font-size: 16px;
+    resize: none;
+    transition: border-color 0.3s;
+  }
+  
+  #sms-text:focus {
+    border-color: #6c5ce7;
+    outline: none;
+  }
+  
+  .editor-tools {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    align-items: center;
+  }
+  
+  .editor-tools button {
+    background: #f0f0f8;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .editor-tools button:hover {
+    background: #6c5ce7;
+    color: white;
+  }
+  
+  #char-counter {
+    margin-left: auto;
+    color: #a29bfe;
+    font-weight: bold;
+  }
+  
+  .phone-preview {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .phone-mockup {
+    width: 300px;
+    height: 600px;
+    background: #2d3436;
+    border-radius: 40px;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+  }
+  
+  .phone-screen {
+    background: #f5f6fa;
+    height: 100%;
+    border-radius: 30px;
+    padding: 20px;
+    overflow: hidden;
+  }
+  
+  .sms-notification {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    margin-top: 30px;
+  }
+  
+  .sender {
+    color: #6c5ce7;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  #preview-text {
+    margin: 10px 0;
+    line-height: 1.5;
+    min-height: 80px;
+  }
+  
+  .timestamp {
+    color: #a29bfe;
+    font-size: 12px;
+    text-align: right;
+  }
+  
+  .btn-gradient {
+    background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+    margin: 30px auto 0;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .btn-gradient:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(108, 92, 231, 0.4);
+  }
+</style>
